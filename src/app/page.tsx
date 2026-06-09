@@ -32,6 +32,8 @@ import {
   Globe,
   Plane,
   MessageCircle,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 /* ─────────────── Animated Section Wrapper ─────────────── */
@@ -117,12 +119,21 @@ function SectionHeading({
 function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   const links = [
     { label: "Home", href: "#home" },
@@ -189,22 +200,55 @@ function Navigation() {
                 {link.label}
               </a>
             ))}
+            {/* Dark Mode Toggle */}
             <button
-              onClick={() => scrollTo("#contact")}
-              className="font-sans text-sm px-6 py-2.5 bg-gold text-white rounded-none hover:bg-gold-light transition-all duration-300 tracking-wider uppercase"
+              onClick={() => setDarkMode(!darkMode)}
+              className="relative w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white/80 hover:text-gold hover:border-gold transition-all duration-300"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              Book Now
+              <AnimatePresence mode="wait" initial={false}>
+                {darkMode ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Sun size={18} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Moon size={18} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="lg:hidden text-white p-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: Dark Mode + Menu Toggle */}
+          <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="text-white/80 hover:text-gold transition-colors p-2"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            <button
+              className="text-white p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -235,12 +279,6 @@ function Navigation() {
                   {link.label}
                 </motion.a>
               ))}
-              <button
-                onClick={() => scrollTo("#contact")}
-                className="w-full mt-4 font-sans text-sm px-6 py-3 bg-gold text-white tracking-wider uppercase hover:bg-gold-light transition-all duration-300"
-              >
-                Book Now
-              </button>
             </div>
           </motion.div>
         )}
@@ -377,16 +415,16 @@ function HeroSection() {
             />
           </a>
           <a
-            href="#contact"
+            href="#services"
             onClick={(e) => {
               e.preventDefault();
               document
-                .querySelector("#contact")
+                .querySelector("#services")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
             className="font-sans px-10 py-4 border-2 border-white/30 text-white tracking-widest uppercase text-sm hover:border-gold hover:text-gold transition-all duration-300"
           >
-            Reserve Now
+            Our Services
           </a>
         </motion.div>
 
@@ -701,7 +739,7 @@ function RoomsSection() {
                   </div>
 
                   <button className="w-full font-sans py-3 border-2 border-charcoal text-charcoal tracking-wider uppercase text-xs hover:bg-charcoal hover:text-white transition-all duration-300">
-                    Book This Room
+                    View Details
                   </button>
                 </div>
               </div>
@@ -1055,8 +1093,8 @@ function CTASection() {
             We Understand Your Needs on Hotel Services
           </h2>
           <p className="font-sans text-white/80 text-lg mb-10 max-w-2xl mx-auto">
-            Book directly and get the best price guaranteed. Experience
-            extraordinary hospitality at Aphrodite International Hotel.
+            Experience extraordinary hospitality and personalized service at
+            Aphrodite International Hotel. Your comfort is our priority.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -1069,7 +1107,7 @@ function CTASection() {
               }}
               className="font-sans px-10 py-4 bg-charcoal text-white tracking-widest uppercase text-sm hover:bg-charcoal/80 transition-all duration-300 inline-flex items-center gap-2 group"
             >
-              Book Your Stay
+              Get in Touch
               <ArrowRight
                 size={16}
                 className="group-hover:translate-x-1 transition-transform"

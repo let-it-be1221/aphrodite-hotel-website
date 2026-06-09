@@ -224,3 +224,125 @@
 .luxury-border:hover::before {
   opacity: 1;
 }
+
+/* ─────────────── Dark Mode ─────────────── */
+.dark {
+  --background: #0f0f1a;
+  --foreground: #e8e0d4;
+  --card: #1a1a2e;
+  --card-foreground: #e8e0d4;
+  --popover: #1a1a2e;
+  --popover-foreground: #e8e0d4;
+  --primary: #d4a843;
+  --primary-foreground: #0f0f1a;
+  --secondary: #252540;
+  --secondary-foreground: #e8e0d4;
+  --muted: #252540;
+  --muted-foreground: #9a9ab0;
+  --accent: #e8e0d4;
+  --accent-foreground: #0f0f1a;
+  --destructive: #dc2626;
+  --border: #333355;
+  --input: #333355;
+  --ring: #d4a843;
+  --gold: #d4a843;
+  --gold-light: #e8c66a;
+  --gold-dark: #b8860b;
+  --cream: #141425;
+  --charcoal: #e8e0d4;
+  --chart-1: #d4a843;
+  --chart-2: #e8e0d4;
+  --chart-3: #e8c66a;
+  --chart-4: #252540;
+  --chart-5: #9a9ab0;
+  --sidebar: #1a1a2e;
+  --sidebar-foreground: #e8e0d4;
+  --sidebar-primary: #d4a843;
+  --sidebar-primary-foreground: #0f0f1a;
+  --sidebar-accent: #252540;
+  --sidebar-accent-foreground: #e8e0d4;
+  --sidebar-border: #333355;
+  --sidebar-ring: #d4a843;
+}
+
+/* Dark mode section backgrounds */
+.dark .bg-cream {
+  background-color: var(--cream) !important;
+}
+
+.dark .bg-white {
+  background-color: var(--card) !important;
+}
+
+.dark .bg-charcoal {
+  background-color: #0f0f1a !important;
+}
+
+.dark .bg-charcoal\/95 {
+  background-color: rgba(15, 15, 26, 0.95) !important;
+}
+
+.dark .bg-charcoal\/98 {
+  background-color: rgba(15, 15, 26, 0.98) !important;
+}
+
+.dark .bg-charcoal\/85 {
+  background-color: rgba(15, 15, 26, 0.85) !important;
+}
+
+.dark .text-charcoal {
+  color: var(--charcoal) !important;
+}
+
+.dark .border-charcoal {
+  border-color: #e8e0d4 !important;
+}
+
+.dark .hover\:bg-charcoal:hover {
+  background-color: #e8e0d4 !important;
+}
+
+.dark .hover\:bg-charcoal\/80:hover {
+  background-color: rgba(232, 224, 212, 0.8) !important;
+}
+
+.dark .hover\:text-white {
+  color: #0f0f1a !important;
+}
+
+.dark .bg-gold\/10 {
+  background-color: rgba(212, 168, 67, 0.1) !important;
+}
+
+.dark .bg-gold\/20 {
+  background-color: rgba(212, 168, 67, 0.15) !important;
+}
+
+.dark .border-gold\/40 {
+  border-color: rgba(212, 168, 67, 0.4) !important;
+}
+
+.dark .border-gold\/20 {
+  border-color: rgba(212, 168, 67, 0.2) !important;
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #0f0f1a;
+}
